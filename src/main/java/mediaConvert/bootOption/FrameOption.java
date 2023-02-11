@@ -6,40 +6,35 @@ import org.bytedeco.javacv.Java2DFrameConverter;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FrameOption extends BootAnimationOption {
-    private final File OUT_FRAME_PATH;
-    private static final int MAX_FOLDER_PHOTO = 80;
+    private static final int MAX_FOLDER_PHOTO_COUNT = 80;
+    private static File OUT_FRAME_PATH;
     private static FFmpegFrameGrabber grabber;
     private static File[] frameDirectories;
 
 
-    public FrameOption(File videoFile, File outFramePath) {
+    public FrameOption(File videoFile, File outFramePath) throws IOException {
         super(videoFile);
-        this.OUT_FRAME_PATH = outFramePath;
-
-        if (!outFramePath.isDirectory())
-            throw new IllegalArgumentException("outFramePath must be a directory");
-
+        OUT_FRAME_PATH = new File(outFramePath.getAbsolutePath() + File.separator + "bootanimation");
+        Files.createDirectories(Path.of(OUT_FRAME_PATH.getAbsolutePath()));
     }
 
-    public void storyboard() throws Exception {
+    public static void storyboard() throws Exception {
         startGrabber();
 
-        int fileCount = (int) Math.ceil( (double)grabber.getLengthInVideoFrames() / MAX_FOLDER_PHOTO);
-        frameDirectories = setFiles(OUT_FRAME_PATH, fileCount);
-
+        int fileCount = (int) Math.ceil( (double)grabber.getLengthInVideoFrames() / MAX_FOLDER_PHOTO_COUNT);
+        frameDirectories = setFiles(fileCount);
 
         int frameRead = 0;
         final int frameAvailable = grabber.getLengthInVideoFrames();
         for (int fileIndex = 0; fileIndex != frameDirectories.length; fileIndex++) {
             Files.createDirectories(Path.of(frameDirectories[fileIndex].getAbsolutePath()));
 
-
             for (int photoIndex = 0; photoIndex != 80 && frameAvailable != frameRead; photoIndex++) {
-
                 BufferedImage image = new Java2DFrameConverter().convert(grabber.grabImage());
                 File photo = new File(frameDirectories[fileIndex] + File.separator +
                         String.format("%06d", grabber.getFrameNumber()) + ".jpg");
@@ -61,21 +56,18 @@ public class FrameOption extends BootAnimationOption {
         return frameDirectories;
     }
 
-    private void startGrabber() throws Exception {
-        grabber = new FFmpegFrameGrabber(VIDEO_FILE);
+    private static void startGrabber() throws Exception {
+        grabber = new FFmpegFrameGrabber(videoFile);
         grabber.start();
     }
 
-    private static File[] setFiles(File file, int fileCount) {
+    private static File[] setFiles(int fileCount) {
         File[] files = new File[fileCount];
 
         for (int i = 0; i != fileCount; i++)
-            files[i] = new File(file.getAbsolutePath() + File.separator + "path" + i);
-
-
+            files[i] = new File(OUT_FRAME_PATH.getAbsolutePath() + File.separator + "path" + i);
 
         return files;
     }
-
 
 }

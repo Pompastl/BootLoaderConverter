@@ -13,7 +13,8 @@ public class BootAnimation {
         BootAnimation.frameOption = frameOption;
         desc = new File(frameOption.getOUT_FRAME_PATH().getAbsolutePath() + File.separator + "desc.txt");
     }
-    public void createAnimation() throws IOException {
+    public void createAnimation() throws Exception {
+        FrameOption.storyboard();
         writeDesc();
     }
     private static void writeDesc() throws IOException {
@@ -22,7 +23,7 @@ public class BootAnimation {
         StringBuilder pathLine = new StringBuilder();
 
         for (int i = 0; i != frameOption.getFrameDirectories().length; i++) {
-            pathLine.append("p " + "1 " + "0 " + frameOption.getFrameDirectories()[i].getName() + "\n");
+            pathLine.append("p 1 0 " + frameOption.getFrameDirectories()[i].getName() + "\n");
         }
 
         writer.write(sizeLine + pathLine);

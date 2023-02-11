@@ -3,7 +3,7 @@ package mediaConvert.bootOption;
 import java.io.File;
 
 public class BootAnimationOption {
-    protected final File VIDEO_FILE;
+    protected static File videoFile;
     protected static int x = -1;
     protected static int y = -1;
     protected static int fps = -1;
@@ -13,7 +13,7 @@ public class BootAnimationOption {
         if (!(videoName.endsWith("mp4") || videoName.endsWith("mov"))) {
             throw new IllegalArgumentException("File is not a video or file is not exist");
         }
-         this.VIDEO_FILE = videoFile;
+        BootAnimationOption.videoFile = videoFile;
     }
 
     public int getX() {
