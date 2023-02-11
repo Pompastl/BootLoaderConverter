@@ -1,7 +1,7 @@
 # BootLoaderConverter
-simple program to create BootAnimation from video
+Simple program to create BootAnimation from video
 
-code example
+#Code example
 ```java
 import mediaConvert.BootAnimation;
 import mediaConvert.bootOption.FrameOption;
@@ -24,3 +24,7 @@ public class Main {
 }
 
 ```
+
+#Libraries
+JavaCV
+https://github.com/bytedeco/javacv
