@@ -1,6 +1,5 @@
 # BootLoaderConverter
 Simple program to create BootAnimation from video
-
 ##Code example
 ```java
 import mediaConvert.BootAnimation;
