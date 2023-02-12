@@ -29,17 +29,17 @@ public class FrameOption extends BootAnimationOption {
         int fileCount = (int) Math.ceil( (double)grabber.getLengthInVideoFrames() / MAX_FOLDER_PHOTO_COUNT);
         frameDirectories = setFiles(fileCount);
 
-        int frameRead = 0;
-        final int frameAvailable = grabber.getLengthInVideoFrames();
         for (int fileIndex = 0; fileIndex != frameDirectories.length; fileIndex++) {
             Files.createDirectories(Path.of(frameDirectories[fileIndex].getAbsolutePath()));
 
-            for (int photoIndex = 0; photoIndex != 80 && frameAvailable != frameRead; photoIndex++) {
+            for (int photoIndex = 0; photoIndex <= 80; photoIndex++) {
                 BufferedImage image = new Java2DFrameConverter().convert(grabber.grabImage());
-                File photo = new File(frameDirectories[fileIndex] + File.separator +
-                        String.format("%06d", grabber.getFrameNumber()) + ".jpg");
+                if (image == null)
+                    break;
+
+                File photo = new File(frameDirectories[fileIndex] + File.separator + "boot_"
+                        + String.format("%03d", grabber.getFrameNumber()) + ".jpg");
                 ImageIO.write(image, "jpg", photo);
-                frameRead++;
             }
 
         }
