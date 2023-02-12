@@ -24,7 +24,8 @@ public class Main {
 
 ```
 # Video demonstration
-[![Watch the video](https://i.imgur.com/jHcv2LWsOeA.png)](https://youtu.be/jHcv2LWsOeA)
+[<img src="https://img.youtube.com/vi/jHcv2LWsOeA/maxresdefault.jpg" width="50%">](https://youtu.be/jHcv2LWsOeA)
+
 
 
    
