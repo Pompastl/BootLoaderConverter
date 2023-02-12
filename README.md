@@ -24,14 +24,9 @@ public class Main {
 
 ```
 # Video demonstration
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/jHcv2LWsOeA/0.jpg)](https://www.youtube.com/watch?v=jHcv2LWsOeA)
+<iframe width="560" height="315" src="https://youtu.be/jHcv2LWsOeA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-    <iframe width="560" height="315"
-src="https://www.youtube.com/embed/MUQfKFzIOeU" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
-
+   
 
 
 ## Libraries
